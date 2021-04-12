@@ -1,16 +1,20 @@
 <template>
   <div id="hello">
     <datepicker
-      v-model="date"
+      v-model="model.date"
       :format="DatePickerFormat"
       :disabledDates="disabledDates"
        :displayFormat="'DD.MM.YYYY'"
-       :first-day-of-week="1"
+       first-day-of-week="Dom"
        calendar-class="my_calendar"
        input-class="textfield"
        :language="ptBR"
+        clear-button-icon="true"
+       :highlighted="highlighted"
     >
     </datepicker>
+
+
   </div>
 </template>
 
@@ -26,29 +30,43 @@ export default {
   data() {
     return {
       ptBR:ptBR,
-       date: "",
-       data: "",
+      back:false,
+      model:{
+             date: "",
+      },
+  
       
       DatePickerFormat: "dd/MM/yyyy",
       disabledDates: {
         // to: new Date(Date.now() - 8640000),
         daysOfMonth: []
       },
+        highlighted: {
+                  backgroundColor: '#1ebb42',
+                  borderRadius: '0'
+                },
+
+                contentStyle: {
+                  borderRadius: '0',
+                  color: '#ffffff',
+                },
        
       
     };
   },
   methods:{
     setDays(){
-      this.disabledDates.daysOfMonth = [1,2,3,4,5,6,7,8,9,10,11,12]
-      // var date = new Date()
-      // this.model.date = date.toLocaleDateString()
+      this.disabledDates.daysOfMonth = [1,2,3,4,5,6,7,8,9,10]
+         var data = new data()
+         this.model.date = data.toLocaleDateString()
+         this.back = !this.back
+      
     }
   },
   mounted(){
     this.setDays()
-       var date = new Date()
-      this.date1 = date.toLocaleDateString()
+   
+   
   }
 };
 </script>
@@ -69,7 +87,7 @@ outline: none;
 text-align: left;
 font: normal normal normal 20px/32px Poppins;
 letter-spacing: 0px;
-color: #9A9A9A;
+
 }
 .my_calendar{
 top: 40px;
@@ -102,8 +120,26 @@ letter-spacing: 0px;
     height: 300px;
     border: 1px solid #ccc;
 }
-.vdp-datepicker * {
+.vdp-datepicker  {
     box-sizing: border-box;
     font-weight: bold;
+    color: #222a42!important;
 }
+
+.vdp-datepicker__calendar .cell:hover {
+
+    color: #fff;
+    background-color: #2CD889;
+    border-color: 1px solid #2CD889;
+}
+.vdp-datepicker__calendar .cell::not(.selected) {
+   
+    color: #fff;
+    background: #2CD889;
+    border: 1px solid #2CD889;
+}
+
+
+
+
 </style>
